@@ -1,13 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        sonarScanner 'SonarQubeScanner'   // Jenkins Global Tool Config me add kiya hua name
-    }
-
     environment {
-        SONAR_HOST_URL = 'http://localhost:9000'             // SonarQube ka URL
-        SONAR_AUTH_TOKEN = sqa_1757b1e7fbb9ad0eff6ae777cb17005a5d35b3b2        // Jenkins me add kiya hua token ID
+        SONAR_HOST_URL = 'http://localhost:9000'                      // SonarQube ka URL
+        SONAR_AUTH_TOKEN = credentials('sonar-token')                 // Jenkins credentials store se secure token fetch
     }
 
     stages {
@@ -32,4 +28,5 @@ pipeline {
         }
     }
 }
+
 
