@@ -1,13 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        sonarScanner 'SonarQubeScanner'  // Global Tool Config में दिया गया नाम
-    }
-
     environment {
-        SONAR_AUTH_TOKEN = credentials('sonar-token')   // Jenkins credentials में दिया गया ID
-        SONAR_HOST_URL = 'http://localhost:9000'
+        SONAR_AUTH_TOKEN = credentials('sonar-token')   // Jenkins credentials ID
+        SONAR_HOST_URL = 'http://localhost:9000'        // SonarQube server URL
     }
 
     stages {
@@ -25,7 +21,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('SonarQube') {  // 'SonarQube' is the name you configured in Jenkins
                     sh '''
                         sonar-scanner \
                           -Dsonar.projectKey=ci-cd-demo \
